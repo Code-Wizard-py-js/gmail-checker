@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {
@@ -22,33 +20,43 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       const formData = {
         email: this.email,
         password: this.password
       };
 
-      axios.post('http://localhost:3000/login', formData)
-        .then(response => {
-          console.log('Response Data:', response.data);
-          if (response.data.message === 'success') {
-            // Set authenticated flag in localStorage
+      try {
+        const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Response Data:', data);
+          if (data.message === 'success') {
             localStorage.setItem('authenticated', 'true');
             localStorage.setItem('userid', this.email);
             this.$emit('login');
           } else {
             this.error = 'Incorrect email or password';
           }
-        })
-        .catch(error => {
-          if (error.response && error.response.status === 401) {
-            this.error = 'Incorrect email or password';
-          } else {
-            this.error = 'Error occurred while logging in';
-            console.error('Error:', error);
-          }
-        });
+        } else if (response.status === 401) {
+          this.error = 'Incorrect email or password';
+        } else {
+          this.error = 'Error occurred while logging in';
+          console.error('Error:', response.statusText);
+        }
+      } catch (error) {
+        this.error = 'Error occurred while logging in';
+        console.error('Error:', error);
+      }
     }
   }
 };
+
 </script>
