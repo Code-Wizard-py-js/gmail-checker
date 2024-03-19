@@ -27,7 +27,7 @@ export default {
       };
 
       try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://18.118.82.76:3000/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
