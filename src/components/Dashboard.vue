@@ -102,7 +102,7 @@ export default {
 
     startFetch() {
   // Fetch data from server using POST method
-  fetch('http://127.0.0.1:3000/sse', {
+  fetch('http://18.118.82.76:3000/sse', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -134,7 +134,7 @@ export default {
   };
   this.processStatus = {message:"wait for cookie generate "};
   // Send request to backend to process the array data
-  fetch('http://127.0.0.1:3000/dataview', {
+  fetch('http://18.118.82.76:3000/dataview', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json' // Set content type to JSON
@@ -161,7 +161,7 @@ export default {
   };
   this.processStatus = { message: "wait for cookie generate" };
   // Send request to backend to process the array data
-  fetch('http://127.0.0.1:3000/startthread', {
+  fetch('http://18.118.82.76:3000/startthread', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json' // Set content type to JSON
@@ -284,7 +284,7 @@ fetchData() {
   };
 
   // Send request to backend to process the array data
-  fetch('http://127.0.0.1:3000/data', {
+  fetch('http://18.118.82.76:3000/data', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json' // Set content type to JSON
@@ -309,7 +309,7 @@ clerdata(){
   folderName: localStorage.getItem("userid")
 };
 
-fetch('http://127.0.0.1:3000/clear', {
+fetch('http://18.118.82.76:3000/clear', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json' // Set content type to JSON
